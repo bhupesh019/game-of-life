@@ -2,7 +2,7 @@ node('GOL') {
     stage('scm') {
         git 'https://github.com/bhupesh019/game-of-life.git'
     }
-    Stage('build') {
+    stage('build') {
         sh 'mvn clean package'
     }
     stage('postbuild') {
