@@ -4,10 +4,13 @@ pipeline {
         cron ('H * * * *')
         pollSCM ('* * * * *')
     }
+    parameters {
+        string(name: 'BRANCH', defaultvalue: 'master', description: 'branch to build')
+    }
     stages {
 	stage('scm') {
 	     steps {
-                  git branch: 'master', url: 'https://github.com/bhupesh019/game-of-life.git'
+                  git branch: "${params.BRANCH}", url: 'https://github.com/bhupesh019/game-of-life.git'
                   input 'continue to the next stage'
 
 	     }
