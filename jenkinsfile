@@ -8,6 +8,7 @@ pipeline {
 	stage('scm') {
 	     steps {
                   git branch: 'master', url: 'https://github.com/bhupesh019/game-of-life.git'
+                  input 'continue to the next stage'
 
 	     }
 	}
