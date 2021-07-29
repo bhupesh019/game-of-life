@@ -51,7 +51,7 @@ pipeline {
         always {
             echo "FINISHED"
         }
-        chnaged {
+        changed {
             echo "Changed"
         }
         unstable {
