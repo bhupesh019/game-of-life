@@ -7,6 +7,10 @@ pipeline {
     parameters {
         string(name: 'BRANCH', defaultValue: 'master', description: 'branch to build')
     }
+    options {
+        timeout(time:1, unit: 'HOURS')
+        retry(2)
+    }
     environment {
         CI_ENV = 'TEST DEVOPS'
     }
@@ -16,6 +20,7 @@ pipeline {
             SOMETEXT = 'TEST DEVOPS2'
         }
 	     steps {
+                  mail subject: 'BUILD STARTED'+env.BUILD_ID, to: 'bhupes11h@devopsqt.com', from: 'bhupesh112@devopsqt.com', body: 'THIS IS TEST'
                   git branch: "${params.BRANCH}", url: 'https://github.com/bhupesh019/game-of-life.git'
                   //input 'continue to the next stage'
                   echo env.CI_ENV
@@ -26,7 +31,10 @@ pipeline {
 	stage('build') {
 	     steps {
                  echo env.GIT_URL
-                 sh 'mvn package'
+                 timeout (time:10, unti: 'MINUTES'){
+                     sh 'mvn package'
+                 }
+                 
 
 	      }
 	}
@@ -35,6 +43,10 @@ pipeline {
         success {
 	    archive '**/*.war'
             junit '**/TEST-*.xml'
+            mail subject: 'BUILD COMPLETED SUCCESSFULLY'+env.BUILD_ID, to: 'bhupes11h@devopsqt.com', from: 'bhupesh112@devopsqt.com', body: 'THIS IS TEST'
 	 }
+        failure{
+            mail subject: 'BUILD FAILED'+env.BUILD_ID+ 'URL is'+env.BUILD_ID, to: 'bhupes11h@devopsqt.com', from: 'bhupesh112@devopsqt.com', body: 'THIS IS TEST'
+        }
     }
 }
