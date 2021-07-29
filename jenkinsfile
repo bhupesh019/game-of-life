@@ -48,5 +48,14 @@ pipeline {
         failure{
             mail subject: 'BUILD FAILED'+env.BUILD_ID+ 'URL is'+env.BUILD_ID, to: 'bhupes11h@devopsqt.com', from: 'bhupesh112@devopsqt.com', body: 'THIS IS TEST'
         }
+        always {
+            echo "FINISHED"
+        }
+        chnaged {
+            echo "Changed"
+        }
+        unstable {
+             mail subject: 'BUILD UNSTABLE'+env.BUILD_ID+ 'URL is'+env.BUILD_ID, to: 'bhupes11h@devopsqt.com', from: 'bhupesh112@devopsqt.com', body: 'THIS IS TEST'
+        }
     }
 }
