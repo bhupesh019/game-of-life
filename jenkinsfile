@@ -7,16 +7,25 @@ pipeline {
     parameters {
         string(name: 'BRANCH', defaultValue: 'master', description: 'branch to build')
     }
+    environment {
+        CI_ENV = 'TEST DEVOPS'
+    }
     stages {
 	stage('scm') {
+        environment {
+            SOMETEXT = 'TEST DEVOPS2'
+        }
 	     steps {
                   git branch: "${params.BRANCH}", url: 'https://github.com/bhupesh019/game-of-life.git'
-                  input 'continue to the next stage'
+                  //input 'continue to the next stage'
+                  echo env.CI_ENV
+                  echo env.SOMETEXT
 
 	     }
 	}
 	stage('build') {
 	     steps {
+                 echo env.GIT_URL
                  sh 'mvn package'
 
 	      }
