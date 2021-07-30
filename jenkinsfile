@@ -9,7 +9,6 @@ pipeline {
     }
     options {
         timeout(time:1, unit: 'HOURS')
-        retry(2)
     }
     environment {
         CI_ENV = 'TEST DEVOPS'
@@ -22,7 +21,6 @@ pipeline {
 	     steps {
                   mail subject: 'BUILD STARTED'+env.BUILD_ID, to: 'bhupes11h@devopsqt.com', from: 'bhupesh112@devopsqt.com', body: 'THIS IS TEST'
                   git branch: "${params.BRANCH}", url: 'https://github.com/bhupesh019/game-of-life.git'
-                  //input 'continue to the next stage'
                   echo env.CI_ENV
                   echo env.SOMETEXT
 
