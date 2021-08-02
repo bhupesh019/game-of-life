@@ -30,10 +30,9 @@ pipeline {
 	     steps {
                  echo env.GIT_
                      sh 'mvn package'
-                 }
-                 stash includes: '**/gameoflife.war', name: 'golwar'
-                 
-         }
+               }
+                   }
+                   
          stage('SONAR ANALYSIS'){
              steps{
                  withSonarQubeEnv('Sonar-8.9LTS'){
