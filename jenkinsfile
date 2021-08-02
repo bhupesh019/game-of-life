@@ -63,4 +63,3 @@ pipeline {
              mail subject: 'BUILD UNSTABLE'+env.BUILD_ID+ 'URL is'+env.BUILD_ID, to: 'bhupes11h@devopsqt.com', from: 'bhupesh112@devopsqt.com', body: 'THIS IS TEST'
         }
     }
-}
