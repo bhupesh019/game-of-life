@@ -28,8 +28,7 @@ pipeline {
 	}
 	stage('build') {
 	     steps {
-                 echo env.GIT_URL
-                 {
+                 echo env.GIT_
                      sh 'mvn package'
                  }
                  stash includes: '**/gameoflife.war', name: 'golwar'
